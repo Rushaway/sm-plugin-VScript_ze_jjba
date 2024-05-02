@@ -2,8 +2,8 @@
 
 #define DEBUG
 
-#define PLUGIN_AUTHOR "Cloud Strife"
-#define PLUGIN_VERSION "1.00"
+#define PLUGIN_AUTHOR "Cloud Strife, .Rushaway, maxime1907"
+#define PLUGIN_VERSION "2.0"
 #define MAP_NAME "ze_jjba_v5fs"
 
 #include <sourcemod>
@@ -11,6 +11,7 @@
 #include <sdkhooks>
 #include <outputinfo>
 #include <vscripts/JJBA>
+#include <multicolors>
 
 #pragma newdecls required
 
@@ -32,7 +33,11 @@ public void OnMapStart()
 	GetCurrentMap(sCurMap, sizeof(sCurMap));
 	bValidMap = (strcmp(MAP_NAME, sCurMap, false) == 0);
 	if (bValidMap)
+	{
+		HookEvent("round_start", OnRoundStart, EventHookMode_PostNoCopy);
+		HookEvent("round_end", OnRoundEnd, EventHookMode_PostNoCopy);
 		g_aMovingNpc = new ArrayList();
+	}
 	else
 	{
 		char sFilename[256];
@@ -40,6 +45,11 @@ public void OnMapStart()
 
 		ServerCommand("sm plugins unload %s", sFilename);
 	}
+}
+
+public void OnRoundStart(Event event, const char[] name, bool dontBroadcast)
+{
+	CreateTimer(12.0, Credits, INVALID_HANDLE, TIMER_FLAG_NO_MAPCHANGE);
 }
 
 public void OnEntityCreated(int entity, const char[] classname)
@@ -82,7 +92,7 @@ stock void ProcessEntitySpawned(int entity)
 		
 		if (StrContains(sTarget, "npc_physbox") != -1)
 		{
-			int ent = GetEntityIndexByName(sTarget, "func_physbox");
+			int ent = Vscripts_GetEntityIndexByName(sTarget, "func_physbox");
 			MovingNpc npc = null;
 			bool bAlreadyInList = false;
 			for (int i = 0; i < g_aMovingNpc.Length; i++)
@@ -169,10 +179,18 @@ public void Cleanup()
 
 public void OnMapEnd()
 {
+	Cleanup();
 	if (bValidMap)
 	{
-		Cleanup();
+		UnhookEvent("round_start", OnRoundStart, EventHookMode_PostNoCopy);
+		UnhookEvent("round_end", OnRoundEnd, EventHookMode_PostNoCopy);
 		delete g_aMovingNpc;
 	}
 	bValidMap = false;
+}
+
+public Action Credits(Handle timer)
+{
+	CPrintToChatAll("{pink}[VScripts] {white}Map using VScripts ported by Cloud Strife.");
+	return Plugin_Continue;
 }
