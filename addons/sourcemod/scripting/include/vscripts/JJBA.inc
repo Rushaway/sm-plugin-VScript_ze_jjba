@@ -12,15 +12,15 @@
 #define SPEED_FORWARD 1.0
 #define SPEED_TURNING 0.5
 
-// stock float FloatMod(float num, float denom)
-// {
-//     return num - denom * RoundToFloor(num / denom);
-// }
+stock float FloatMod(float num, float denom)
+{
+    return num - denom * RoundToFloor(num / denom);
+}
 
-// stock float operator%(float oper1, float oper2)
-// {
-//     return FloatMod(oper1, oper2);
-// }
+stock float operator%(float oper1, float oper2)
+{
+    return FloatMod(oper1, oper2);
+}
 
 public bool IsValidPlayer(int player)
 {
