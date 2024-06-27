@@ -17,16 +17,16 @@ project:
       - source: /addons/sourcemod/scripting/include
         dest: /addons/sourcemod/scripting/include
 
-    - name: ext-outputinfo
+    - name: eventqueue
       type: git
-      repo: https://github.com/srcdslab/sm-ext-outputinfo
+      repo: https://github.com/srcdslab/sm-ext-eventqueue
       unpack:
       - source: /include
         dest: /addons/sourcemod/scripting/include
 
-    - name: multicolors
+    - name: basic
       type: git
-      repo: https://github.com/srcdslab/sm-plugin-MultiColors
+      repo: https://github.com/srcdslab/sm-plugin-basic
       unpack:
       - source: /addons/sourcemod/scripting/include
         dest: /addons/sourcemod/scripting/include

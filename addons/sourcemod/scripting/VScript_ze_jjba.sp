@@ -1,9 +1,5 @@
 #pragma semicolon 1
 
-#define DEBUG
-
-#define PLUGIN_AUTHOR "Cloud Strife, .Rushaway, maxime1907"
-#define PLUGIN_VERSION "2.0"
 #define MAP_NAME "ze_jjba_v5fs"
 
 #include <sourcemod>
@@ -21,9 +17,9 @@ ArrayList g_aMovingNpc = null;
 public Plugin myinfo = 
 {
 	name = "JJBA vscripts",
-	author = PLUGIN_AUTHOR,
+	author = "Cloud Strife, .Rushaway, maxime1907",
 	description = "JJBA vscripts",
-	version = PLUGIN_VERSION,
+	version = "2.0",
 	url = "https://steamcommunity.com/id/cloudstrifeua/"
 };
 
