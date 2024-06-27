@@ -31,6 +31,20 @@ project:
       - source: /addons/sourcemod/scripting/include
         dest: /addons/sourcemod/scripting/include
 
+    - name: multicolors
+      type: git
+      repo: https://github.com/srcdslab/sm-plugin-MultiColors
+      unpack:
+      - source: /addons/sourcemod/scripting/include
+        dest: /addons/sourcemod/scripting/include
+
+    - name: ext-outputinfo
+      type: git
+      repo: https://github.com/srcdslab/sm-ext-outputinfo
+      unpack:
+      - source: /include
+        dest: /addons/sourcemod/scripting/include
+
   root: /
   output: /addons/sourcemod/plugins
   targets:
